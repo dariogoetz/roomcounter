@@ -23,6 +23,12 @@ async def get_doors(db: Session = Depends(db)):
     return doors
 
 
+@router.get("/doors/{door_id}", response_model=Door)
+async def get_door(door_id: int, db: Session = Depends(db)):
+    door = crud_door.get_door_by_id(db, door_id)
+    return door
+
+
 @router.post("/doors/", response_model=DoorCreate)
 async def add_door(door: DoorCreate, db: Session = Depends(db)):
     door = crud_door.add_door(db, door)
@@ -30,6 +36,6 @@ async def add_door(door: DoorCreate, db: Session = Depends(db)):
 
 
 @router.put("/doors/{door_id}", response_model=DoorCreate)
-async def put_door(door: DoorCreate, db: Session = Depends(db)):
-    door = crud_door.add_door(db, door)
+async def put_door(door_id: int, door: DoorCreate, db: Session = Depends(db)):
+    door = crud_door.add_door(db, door, door_id, put=True)
     return door

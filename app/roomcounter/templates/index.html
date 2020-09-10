@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Awesome Room Counter{% endblock title %}
+{% block nav_items %}["#nav_item_counter"]{% endblock nav_items %}
+
+{% block javascript %}
+{{ super() }}
+<script src="/static/roomcounter/js/roomcounter.js"></script>
+
+<script>
+  new Vue({el: "#roomcounter"})
+</script>
+{% endblock javascript %}
+
+
+{% block content %}
+
+<div id="roomcounter">
+  <room-counter door_id=1></room-counter>
+</div>
+
+{% endblock content %}

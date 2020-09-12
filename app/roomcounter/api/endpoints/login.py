@@ -12,16 +12,17 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 
-from roomcounter.api.dependencies import db
+from roomcounter.api.dependencies import db, optional_user
 from roomcounter.core import security
 from roomcounter.core.config import settings
 from roomcounter.crud import crud_user
+from roomcounter.schemas.user import AuthenticatedUser
 
 
 router = APIRouter()
 
 
-@router.post("/token")
+@router.post("/login")
 async def login_for_access_token(
         form_data: OAuth2PasswordRequestForm = Depends(),
         db: Session = Depends(db),
@@ -66,3 +67,8 @@ async def login_for_access_token(
 @router.get("/logout")
 async def route_logout_and_remove_cookie(response: Response):
     response.delete_cookie("Authorization")
+
+
+@router.get("/me", response_model=AuthenticatedUser)
+async def me(current_user: AuthenticatedUser = Depends(optional_user)):
+    return current_user

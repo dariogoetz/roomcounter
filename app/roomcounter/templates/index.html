@@ -8,15 +8,24 @@
 <script src="/static/roomcounter/js/roomcounter.js"></script>
 
 <script>
-  new Vue({el: "#roomcounter"})
+  new Vue({
+      el: "#roomcounter",
+      data: {
+          door_id: null
+      },
+      methods: {
+          set_door: function(door_id) {
+              this.door_id=door_id;
+          },
+      },
+  })
 </script>
 {% endblock javascript %}
 
-
 {% block content %}
-
 <div id="roomcounter">
-  <room-counter door_id=1></room-counter>
+  <doors-dropdown v-on:selected="set_door"></doors-dropdown>
+  <room-counter v-if="door_id !== null" v-bind:door_id="door_id"></room-counter>
 </div>
 
 {% endblock content %}

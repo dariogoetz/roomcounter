@@ -24,7 +24,7 @@
 
   <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" style="padding:0;">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" role="navigation" style="padding:0;">
 
 		   <!-- The following gives three lines if navbar is collapsed -->
             <div class="navbar-header">
@@ -43,19 +43,9 @@
                     {% endif %}
 
                      {% if global_is_admin %}
-                    <li class="nav-item" id='nav_item_results_details'><a class="nav-link" href="/not/set"><span class="fa fa-list"></span>&nbsp;Administration</a></li>
-                    {% endif %}
-
-                    {% if not global_logged_in %}
-                    <li class="nav-item" id='nav_item_login'><a class="nav-link" href="/auth/login"><span class="fa fa-play-circle"></span>&nbsp;Login</a></li>
                     {% endif %}
                 </ul>
-                {% if global_logged_in %}
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link"><span class="fa fa-user"></span>&nbsp;{{ global_username }}</a></li>
-                    <li class="nav-item" id='nav_item_logout'><a class="nav-link" href="/auth/logout"><span class="fa fa-power-off"></span>&nbsp;Logout</a></li>
-                </ul>
-                {% endif %}
+                <div id="login_element"><login></login></div>
             </div>
     </nav>
 
@@ -80,6 +70,8 @@
     <script src="/static/jquery-3.5.1/jquery-3.5.1.min.js"></script>
     <script src="/static/vue-2.6.12/vue.js"></script>
     <script src="/static/bootstrap-4.1.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/roomcounter/js/login.js"></script>
+    <script src="/static/roomcounter/js/doors_dropdown.js"></script>
     <script src="/static/roomcounter/js/string_format.js"></script>
     <script src="/static/roomcounter/js/websocket_client.js"></script>
     <script src="/static/reconnecting-websocket/reconnecting-websocket.js"></script>
@@ -92,6 +84,9 @@
              $(elem_ids[i]).addClass("active");
          }
      });
+
+      new Vue({el: "#login_element"})
+
     </script>
     {% endblock javascript %}
 

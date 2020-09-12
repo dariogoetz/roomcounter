@@ -9,7 +9,7 @@ from typing import List
 
 from sqlalchemy.orm import Session
 
-from roomcounter.api.dependencies import db, admin
+from roomcounter.api.dependencies import db, authenticated_user
 from roomcounter.crud import crud_activity
 from roomcounter.schemas.activity import PassDoor
 from roomcounter.schemas.user import AuthenticatedUser
@@ -22,6 +22,6 @@ router = APIRouter()
 async def pass_door(
         activity: PassDoor,
         db: Session = Depends(db),
-        user: AuthenticatedUser = Depends(admin)):
+        user: AuthenticatedUser = Depends(authenticated_user)):
     res = crud_activity.pass_door(db, activity)
     return res

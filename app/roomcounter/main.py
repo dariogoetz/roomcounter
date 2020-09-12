@@ -26,8 +26,3 @@ async def home(request: Request,
         "index.html",
         {"request": request, **context}
     )
-
-
-@app.get("/users/me", response_model=AuthenticatedUser)
-async def me(current_user: AuthenticatedUser = Depends(admin)):
-    return current_user

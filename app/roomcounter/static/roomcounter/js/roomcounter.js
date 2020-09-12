@@ -59,20 +59,12 @@ Vue.component('room-counter', {
             if (this.right_capacity > 0)
                 this.right_utilization += val;
 
-            let value_to_send = this.count_left_to_right;
-
-            // reset counter to zero (if there was another count
-            // in the meantime, account for it -> subtract value to send)
-            this.count_left_to_right -= value_to_send;
-
-            $.post("/activity/pass_door", JSON.stringify({door_id: this.door_id, count_left_to_right: value_to_send}))
-                .done(this.refresh)
-                .fail( () => {
-                    // remember not sent counters for next try
-                    this.count_left_to_right += value_to_send;
-                });
+            this.send();
         },
-        refresh: function () {
+        refresh: function (send=false) {
+            if(send && this.count_left_to_right != 0) {
+                this.send();
+            };
             $.get("/door/doors/" + this.door_id)
                 .done(data => {
                     this.name = data.name;
@@ -84,6 +76,22 @@ Vue.component('room-counter', {
                     this.right_name = data.right_room.name;
                     this.right_utilization = data.right_room.utilization;
                     this.right_capacity = data.right_room.capacity;
+                });
+        },
+        send: function () {
+            let value_to_send = this.count_left_to_right;
+
+            // reset counter to zero (if there was another count
+            // in the meantime, account for it -> subtract value to send)
+            this.count_left_to_right -= value_to_send;
+
+            $.post("/activity/pass_door", JSON.stringify({door_id: this.door_id, count_left_to_right: value_to_send}))
+                .done( () => {
+                    this.refresh(false);
+                })
+                .fail( () => {
+                    // remember not sent counters for next try
+                    this.count_left_to_right += value_to_send;
                 });
         },
     },
@@ -107,6 +115,11 @@ Vue.component('room-counter', {
             if (this.right_capacity == 0)
                 return false;
             return this.right_utilization >= this.right_capacity;
+        },
+    },
+    watch: {
+        door_id: function() {
+            this.refresh();
         },
     },
     created: function () {

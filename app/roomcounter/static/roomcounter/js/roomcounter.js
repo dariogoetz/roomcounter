@@ -124,5 +124,20 @@ Vue.component('room-counter', {
     },
     created: function () {
         this.refresh();
+        let _this = this;
+
+        console.log("Starting connection to WebSocket Server")
+        this.connection = new WebSocket("ws://localhost:8000/websockets/")
+
+        this.connection.onmessage = function(event) {
+            let data = event.data;
+            if (data == "pass_door") {
+                _this.refresh();
+            }
+        }
+
+        this.connection.onopen = function(event) {
+            console.log("Successfully connected to the echo websocket server...")
+        }
     },
 })

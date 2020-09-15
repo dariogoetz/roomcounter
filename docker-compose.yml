@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    image: roomcounter
+    restart: unless-stopped
+    volumes:
+      - ./app/roomcounter:/app/roomcounter
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`roomcounter.${DOMAIN}`)"
+      - "traefik.http.routers.app.tls.certresolver=le"
+      - "traefik.http.routers.app.entrypoints=websecure"
+    environment:
+      - APP_NAME=Room Counter
+      - INITIAL_USER=admin
+      - INITIAL_PASSWORD=roomcounter2000
+      - INITIAL_ROOM_NAME=Draussen
+      - DB_URI="postgresql://postgres:roomcounter2000@postgres:5432/postgres"
+    networks:
+      - default
+      - traefik
+
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=roomcounter2000
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

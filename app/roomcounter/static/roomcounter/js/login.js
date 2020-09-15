@@ -38,11 +38,10 @@ Vue.component('login', {
                     location.reload();
                 })
                 .fail( (a,b,c, d) => {
-                    console.log("Failed to login:", c);
+                    alert("Failed to login: " + c);
                 });
         },
         logout: function() {
-            console.log("logout");
             $.get(this.logout_url)
                 .done( (data) => {
                     location.reload();

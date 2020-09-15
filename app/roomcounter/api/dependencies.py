@@ -10,7 +10,7 @@ from roomcounter.schemas.token import TokenData
 from roomcounter.schemas.user import AuthenticatedUser
 from roomcounter.models.user import PermissionType
 
-oauth2_scheme = OAuth2PasswordBearerCookie(tokenUrl="auth/token",
+oauth2_scheme = OAuth2PasswordBearerCookie(tokenUrl="auth/login",
                                            auto_error=False)
 
 

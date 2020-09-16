@@ -12,10 +12,10 @@ WORKDIR /app
 # RUN python3 setup.py install
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3
 
-RUN poetry install
+RUN $HOME/.poetry/bin/poetry install
 
 RUN apt-get update && apt-get install -y zip
 
 ENV PYTHONPATH=.
 
-CMD poetry run uvicorn roomcounter.main:app --port 80
+CMD $HOME/.poetry/bin/poetry run uvicorn roomcounter.main:app --port 80

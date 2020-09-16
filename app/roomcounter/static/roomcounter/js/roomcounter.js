@@ -137,7 +137,7 @@ Vue.component('room-counter', {
         }
 
         this.connection.onopen = function(event) {
-            console.log("Successfully connected to the echo websocket server...")
+            console.log("Successfully connected to WebSocket server...")
         }
     },
 })

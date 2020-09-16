@@ -9,15 +9,16 @@ services:
       - ./app/roomcounter:/app/roomcounter
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`roomcounter.${DOMAIN}`)"
-      - "traefik.http.routers.app.tls.certresolver=le"
-      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.roomcounter.rule=Host(`roomcounter.${DOMAIN}`)"
+      - "traefik.http.routers.roomcounter.tls.certresolver=le"
+      - "traefik.http.routers.roomcounter.entrypoints=websecure"
     environment:
       - APP_NAME=Room Counter
       - INITIAL_USER=admin
       - INITIAL_PASSWORD=roomcounter2000
       - INITIAL_ROOM_NAME=Draussen
-      - DB_URI="postgresql://postgres:roomcounter2000@postgres:5432/postgres"
+      - DB_URI=postgresql://postgres:roomcounter2000@postgres:5432/postgres
     networks:
       - default
       - traefik
@@ -32,3 +33,7 @@ services:
 
 volumes:
   pgdata:
+
+networks:
+  traefik:
+    external: true

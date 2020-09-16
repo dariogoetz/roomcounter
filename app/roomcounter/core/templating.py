@@ -2,12 +2,12 @@ from typing import Optional
 from fastapi import Depends
 from fastapi.templating import Jinja2Templates
 
-# from roomcounter.core import config
+from roomcounter.core import config
 from roomcounter.models.user import PermissionType
 from roomcounter.schemas.user import AuthenticatedUser
 from roomcounter.api.dependencies import optional_user
 
-# settings = config.settings()
+settings = config.settings
 
 templates = Jinja2Templates(directory="roomcounter/templates")
 
@@ -19,6 +19,8 @@ def default_template_context(
     is logged in, whether he is the admin, etc.
     """
     tplcontext = dict()
+    tplcontext["domain"] = settings.DOMAIN
+    tplcontext["ws_protocol"] = settings.WS_PROTOCOL
     tplcontext['global_username'] = ""
     if user is not None:
         tplcontext['global_username'] = user.username

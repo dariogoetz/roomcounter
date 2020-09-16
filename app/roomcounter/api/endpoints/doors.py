@@ -18,7 +18,7 @@ from roomcounter.schemas.user import AuthenticatedUser
 router = APIRouter()
 
 
-@router.get("/doors/", response_model=List[Door])
+@router.get("/", response_model=List[Door])
 async def get_doors(
         db: Session = Depends(db),
         user: AuthenticatedUser = Depends(authenticated_user)):
@@ -26,7 +26,7 @@ async def get_doors(
     return doors
 
 
-@router.get("/doors/{door_id}", response_model=Door)
+@router.get("/{door_id}", response_model=Door)
 async def get_door(
         door_id: int, db: Session = Depends(db),
         user: AuthenticatedUser = Depends(authenticated_user)):
@@ -34,7 +34,7 @@ async def get_door(
     return door
 
 
-@router.post("/doors/", response_model=DoorCreate)
+@router.post("/", response_model=DoorCreate)
 async def add_door(
         door: DoorCreate, db: Session = Depends(db),
         user: AuthenticatedUser = Depends(admin)):
@@ -42,7 +42,7 @@ async def add_door(
     return door
 
 
-@router.put("/doors/{door_id}", response_model=DoorCreate)
+@router.put("/{door_id}", response_model=DoorCreate)
 async def put_door(
         door_id: int, door: DoorCreate, db: Session = Depends(db),
         user: AuthenticatedUser = Depends(admin)):

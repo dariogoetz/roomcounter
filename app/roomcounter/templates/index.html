@@ -25,7 +25,7 @@
 {% block content %}
 <div id="roomcounter">
   <doors-dropdown v-on:selected="set_door"></doors-dropdown>
-  <room-counter v-if="door_id !== null" v-bind:door_id="door_id"></room-counter>
+  <room-counter ws_url="{{ ws_protocol }}{{ domain }}/websockets/" v-if="door_id !== null" v-bind:door_id="door_id"></room-counter>
 </div>
 
 {% endblock content %}

@@ -18,14 +18,14 @@ from roomcounter.schemas.user import AuthenticatedUser
 router = APIRouter()
 
 
-@router.get("/rooms/", response_model=List[Room])
+@router.get("/", response_model=List[Room])
 async def get_rooms(
         db: Session = Depends(db),
         user: AuthenticatedUser = Depends(authenticated_user)):
     return crud_room.get_rooms(db)
 
 
-@router.post("/rooms/", response_model=Room)
+@router.post("/", response_model=Room)
 async def add_room(
         room: RoomCreate,
         db: Session = Depends(db),

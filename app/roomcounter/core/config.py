@@ -5,6 +5,8 @@ class Settings(BaseSettings):
     APP_NAME: str = "Room Counter"
 
     DB_URI: str = "sqlite:///./roomcounter.sqlite"
+    DOMAIN: str = "localhost:8000"
+    WS_PROTOCOL: str = "ws://"
     INITIAL_USER: str = "dario"
     INITIAL_PASSWORD: str = "uiae"
     INITIAL_ROOM_NAME: str = "Draussen"

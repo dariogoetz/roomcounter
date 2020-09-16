@@ -16,7 +16,7 @@ Vue.component('doors-dropdown', {
 </div>
     `,
     created: function() {
-        $.get("/door/doors")
+        $.get("/doors/")
             .done( (doors) => {
                 this.doors = doors;
             })

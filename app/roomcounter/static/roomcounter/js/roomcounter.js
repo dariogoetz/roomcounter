@@ -1,6 +1,6 @@
 // Define a new component called button-counter
 Vue.component('room-counter', {
-    props: ["door_id"],
+    props: ["door_id", "ws_url"],
     data: function () {
         return {
             name: "Door",
@@ -65,7 +65,7 @@ Vue.component('room-counter', {
             if(send && this.count_left_to_right != 0) {
                 this.send();
             };
-            $.get("/door/doors/" + this.door_id)
+            $.get("/doors/{0}".format(this.door_id))
                 .done(data => {
                     this.name = data.name;
 
@@ -85,7 +85,7 @@ Vue.component('room-counter', {
             // in the meantime, account for it -> subtract value to send)
             this.count_left_to_right -= value_to_send;
 
-            $.post("/activity/pass_door", JSON.stringify({door_id: this.door_id, count_left_to_right: value_to_send}))
+            $.post("/activities/pass_door", JSON.stringify({door_id: this.door_id, count_left_to_right: value_to_send}))
                 .done( () => {
                     this.refresh(false);
                 })
@@ -127,7 +127,7 @@ Vue.component('room-counter', {
         let _this = this;
 
         console.log("Starting connection to WebSocket Server")
-        this.connection = new WebSocket("ws://localhost:8000/websockets/")
+        this.connection = new WebSocket(this.ws_url);
 
         this.connection.onmessage = function(event) {
             let data = event.data;

@@ -7,7 +7,6 @@ router = APIRouter()
 
 @router.websocket("/")
 async def websocket_endpoint(websocket: WebSocket):
-    print("uiae")
     await manager.connect(websocket)
     try:
         while True:

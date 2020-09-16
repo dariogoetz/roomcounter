@@ -10,11 +10,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
-      - "traefik.http.routers.roomcounter.rule=Host(`roomcounter.${DOMAIN}`)"
+      - "traefik.http.routers.roomcounter.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.roomcounter.tls.certresolver=le"
       - "traefik.http.routers.roomcounter.entrypoints=websecure"
     environment:
       - APP_NAME=Roomcounter
+      - DOMAIN=$DOMAIN
+      - WS_PROTOCOL=wss://
       - INITIAL_USER=admin
       - INITIAL_PASSWORD=roomcounter2000
       - INITIAL_ROOM_NAME=Draußen

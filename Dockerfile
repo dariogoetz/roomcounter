@@ -18,4 +18,4 @@ RUN apt-get update && apt-get install -y zip
 
 ENV PYTHONPATH=.
 
-CMD $HOME/.poetry/bin/poetry run uvicorn roomcounter.main:app --port 80
+CMD $HOME/.poetry/bin/poetry run uvicorn roomcounter.main:app --host 0.0.0.0 --port 80

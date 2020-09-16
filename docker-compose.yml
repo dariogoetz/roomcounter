@@ -14,14 +14,15 @@ services:
       - "traefik.http.routers.roomcounter.tls.certresolver=le"
       - "traefik.http.routers.roomcounter.entrypoints=websecure"
     environment:
-      - APP_NAME=Room Counter
+      - APP_NAME=Roomcounter
       - INITIAL_USER=admin
       - INITIAL_PASSWORD=roomcounter2000
-      - INITIAL_ROOM_NAME=Draussen
+      - INITIAL_ROOM_NAME=Draußen
       - DB_URI=postgresql://postgres:roomcounter2000@postgres:5432/postgres
+        #command: /root/.poetry/bin/poetry run uvicorn roomcounter.main:app --port 80 --host 0.0.0.0 --log-level debug
     networks:
-      - default
       - traefik
+      - default
 
   postgres:
     image: postgres

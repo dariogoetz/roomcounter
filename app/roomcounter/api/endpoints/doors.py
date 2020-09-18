@@ -44,7 +44,9 @@ async def add_door(
 
 @router.put("/{door_id}", response_model=DoorCreate)
 async def put_door(
-        door_id: int, door: DoorCreate, db: Session = Depends(db),
+        door_id: int,
+        door: DoorCreate,
+        db: Session = Depends(db),
         user: AuthenticatedUser = Depends(admin)):
     door = crud_door.add_door(db, door, door_id, put=True)
     return door

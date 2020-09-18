@@ -32,3 +32,13 @@ async def add_room(
         user: AuthenticatedUser = Depends(admin)):
     room = crud_room.add_room(db, room)
     return room
+
+
+@router.put("/{room_id}", response_model=RoomCreate)
+async def put_room(
+        room_id: int,
+        room: RoomCreate,
+        db: Session = Depends(db),
+        user: AuthenticatedUser = Depends(admin)):
+    room = crud_room.add_room(db, room, room_id, put=True)
+    return room

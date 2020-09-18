@@ -25,7 +25,8 @@ Vue.component('room-counter', {
       <h3 class="card-header" v-bind:class="{'bg-danger': left_room_critical}">{{ left_name }}</h3>
       <div class="card-body" v-bind:class="{'bg-danger': left_room_full}">
 
-        <span style="font-size: 2em;">{{ left_utilization }} / {{ left_capacity }}</span>
+        <span v-if="left_capacity > 0" style="font-size: 2em;">{{ left_utilization }} / {{ left_capacity }}</span>
+        <span v-else style="font-size: 2em;">Keine Beschränkung</span>
         <br>
         <br>
         <button class="btn btn-lg btn-secondary" v-bind:class="{'btn-danger': left_room_critical, 'btn-secondary': !left_room_critical}" v-on:click="pass_door(-1)">Enter</button>
@@ -38,7 +39,8 @@ Vue.component('room-counter', {
     <div class="card text-center" v-bind:class="{'border-danger': right_room_critical}">
       <h3 class="card-header" v-bind:class="{'bg-danger': right_room_critical}">{{ right_name }}</h3>
       <div class="card-body" v-bind:class="{'bg-danger': right_room_full}">
-        <span style="font-size: 2em;">{{ right_utilization }} / {{ right_capacity }}</span>
+        <span v-if="right_capacity > 0" style="font-size: 2em;">{{ right_utilization }} / {{ right_capacity }}</span>
+        <span v-else style="font-size: 2em;">Keine Beschränkung</span>
         <br>
         <br>
         <button class="btn btn-lg" v-bind:class="{'btn-danger': right_room_critical, 'btn-secondary': !right_room_critical}" v-on:click="pass_door(1)">Enter</button>

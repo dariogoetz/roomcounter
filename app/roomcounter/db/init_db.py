@@ -1,3 +1,5 @@
+from sqlalchemy.orm import Session
+
 from roomcounter.db.session import engine, SessionLocal
 from roomcounter.db.base_class import Base
 from roomcounter.core.config import settings
@@ -30,7 +32,7 @@ def initialize_sql():
             time.sleep(5)
 
 
-def initialize_default_user(session):
+def initialize_default_user(session: Session):
     users = crud_user.get_users(session)
     if not users:
         user = schema_user.UserCreate(
@@ -42,7 +44,7 @@ def initialize_default_user(session):
         log.info('Initializing default user "%s"', settings.INITIAL_USER)
 
 
-def initialize_default_room(session):
+def initialize_default_room(session: Session):
     rooms = crud_room.get_rooms(session)
     if not rooms:
         room = schema_room.RoomCreate(

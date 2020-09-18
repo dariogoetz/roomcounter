@@ -3,7 +3,7 @@
     Copyright (c) 2020 Dario Götz.
     All rights reserved.
 """
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 
 from typing import List
 

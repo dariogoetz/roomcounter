@@ -2,12 +2,10 @@ from typing import Optional
 from fastapi import Depends
 from fastapi.templating import Jinja2Templates
 
-from roomcounter.core import config
+from roomcounter.core.config import settings
 from roomcounter.models.user import PermissionType
 from roomcounter.schemas.user import AuthenticatedUser
 from roomcounter.api.dependencies import optional_user
-
-settings = config.settings
 
 templates = Jinja2Templates(directory="roomcounter/templates")
 

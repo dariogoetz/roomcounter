@@ -36,6 +36,8 @@ def add_room(db: Session,
             continue
         setattr(db_room, key, val)
 
+    db_room.utilization = 0
+
     db.add(db_room)
     db.commit()
     db.refresh(db_room)

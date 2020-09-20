@@ -50,6 +50,7 @@ def initialize_default_room(session: Session):
         room = schema_room.RoomCreate(
             name=settings.INITIAL_ROOM_NAME,
             capacity=0,
+            utilization=0,
         )
         crud_room.add_room(db=session, room=room)
         log.info('Initializing default room "%s"', settings.INITIAL_ROOM_NAME)

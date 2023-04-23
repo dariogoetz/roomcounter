@@ -7,6 +7,8 @@ services:
     restart: unless-stopped
     volumes:
       - ./app/roomcounter:/app/roomcounter
+    ports:
+      - 8080:80
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"

@@ -23,7 +23,7 @@ services:
       - DB_URI=postgresql://postgres:roomcounter2000@postgres:5432/postgres
         #command: /root/.poetry/bin/poetry run uvicorn roomcounter.main:app --port 80 --host 0.0.0.0 --log-level debug
     networks:
-      - traefik
+      # - traefik
       - default
 
   postgres:

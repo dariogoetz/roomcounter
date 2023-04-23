@@ -1,6 +1,6 @@
 # Roomcounter Web-Application
 
-Small web-application that was developed for and used for the [German Rapid Surf League Championships in 2023](https://wellenreitverband.de/events/rapid-surf-dm-2020) in Berlin.
+Small web-application that was developed for and used for the [German Rapid Surf League Championships in 2020](https://wellenreitverband.de/events/rapid-surf-dm-2020) in Berlin.
 
 <img src="screenshots/screenshot1.png" alt="Screenshot" width="428">
 
